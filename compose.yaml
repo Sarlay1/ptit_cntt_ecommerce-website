@@ -1,0 +1,51 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: webbanhang
+      MYSQL_USER: webbanhang
+      MYSQL_PASSWORD: ${DB_PASSWORD:-webbanhang-local-only}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-webbanhang-root-local-only}
+    volumes:
+      - webbanhang_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/webbanhang?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: webbanhang
+      DB_PASSWORD: ${DB_PASSWORD:-webbanhang-local-only}
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-me-32-bytes}
+      UPLOAD_DIR: /app/uploads
+      UPLOAD_BASE_URL: /uploads
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+      CLOUDINARY_FOLDER: ${CLOUDINARY_FOLDER:-lumi-beauty/products}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:8088}
+    volumes:
+      - product_uploads:/app/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "${WEB_PORT:-8088}:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  webbanhang_data:
+  product_uploads:

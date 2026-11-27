@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" rx="36" fill="#F8ECE9"/>
+  <circle cx="640" cy="170" r="115" fill="#EBD1D0"/>
+  <circle cx="145" cy="650" r="155" fill="#F0D8D5"/>
+  <rect x="280" y="270" width="240" height="350" rx="38" fill="#D9A7A8"/>
+  <rect x="310" y="220" width="180" height="70" rx="14" fill="#A75C71"/>
+  <rect x="345" y="165" width="110" height="65" rx="16" fill="#744651"/>
+  <rect x="325" y="345" width="150" height="115" rx="12" fill="#FFF8F5"/>
+  <path d="M365 390c18-27 52-27 70 0-18 25-52 25-70 0Z" fill="#C77B88"/>
+  <text x="400" y="492" fill="#744651" font-family="Georgia,serif" font-size="24" text-anchor="middle">LUMI BEAUTY</text>
+  <text x="400" y="690" fill="#865E66" font-family="Arial,sans-serif" font-size="24" text-anchor="middle">Chăm sóc dịu dàng mỗi ngày</text>
+</svg>

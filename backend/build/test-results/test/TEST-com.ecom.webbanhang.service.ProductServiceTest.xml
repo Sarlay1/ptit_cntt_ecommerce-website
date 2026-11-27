@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ecom.webbanhang.service.ProductServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-27T05:28:05.383Z" hostname="DESKTOP-8KHVSP4" time="0.015">
+  <properties/>
+  <testcase name="combinesSearchTextWithTheSelectedCategory()" classname="com.ecom.webbanhang.service.ProductServiceTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

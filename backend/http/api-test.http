@@ -1,0 +1,118 @@
+### ================== AUTH ==================
+
+### Đăng ký tài khoản mới
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser01",
+  "email": "testuser01@gmail.com",
+  "password": "123456"
+}
+
+### Đăng nhập bằng tài khoản customer có sẵn (seed data)
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "customer",
+  "password": "customer123"
+}
+
+> {% client.global.set("customer_token", response.body.token); %}
+
+### Đăng nhập bằng tài khoản admin có sẵn (seed data)
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+> {% client.global.set("admin_token", response.body.token); %}
+
+
+### ================== PRODUCT (Public) ==================
+
+### Xem danh sách sản phẩm
+GET http://localhost:8080/api/v1/products
+
+### Xem chi tiết sản phẩm id=1
+GET http://localhost:8080/api/v1/products/1
+
+### Xem danh mục
+GET http://localhost:8080/api/v1/categories
+
+
+### ================== CART (Customer) ==================
+
+### Thêm sản phẩm vào giỏ hàng
+POST http://localhost:8080/api/v1/cart
+Content-Type: application/json
+Authorization: Bearer {{customer_token}}
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+### Xem giỏ hàng
+GET http://localhost:8080/api/v1/cart
+Authorization: Bearer {{customer_token}}
+
+
+### ================== ORDER (Customer) ==================
+
+### Đặt hàng (checkout)
+POST http://localhost:8080/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer {{customer_token}}
+
+{
+  "receiverName": "Nguyen Van A",
+  "phoneNumber": "0912345678",
+  "shippingAddress": "123 Le Loi, Q1, TP.HCM"
+}
+
+### Xem lịch sử đơn hàng
+GET http://localhost:8080/api/v1/orders
+Authorization: Bearer {{customer_token}}
+
+### Hủy đơn hàng id=1
+PUT http://localhost:8080/api/v1/orders/1/cancel
+Authorization: Bearer {{customer_token}}
+
+
+### ================== ADMIN ==================
+
+### [ADMIN] Thêm sản phẩm mới
+POST http://localhost:8080/api/v1/admin/products
+Content-Type: application/json
+Authorization: Bearer {{admin_token}}
+
+{
+  "name": "Chuột không dây Logitech",
+  "description": "Chuột văn phòng chống ồn",
+  "imageUrl": "https://placehold.co/400x400?text=Mouse",
+  "price": 350000,
+  "quantity": 30,
+  "categoryId": 3
+}
+
+### [ADMIN] Xem toàn bộ đơn hàng
+GET http://localhost:8080/api/v1/admin/orders
+Authorization: Bearer {{admin_token}}
+
+### [ADMIN] Cập nhật trạng thái đơn hàng id=1
+PUT http://localhost:8080/api/v1/admin/orders/1/status
+Content-Type: application/json
+Authorization: Bearer {{admin_token}}
+
+{
+  "status": "CONFIRMED"
+}
+
+### [TEST 403] Customer cố xem đơn của người khác / route admin -> phải trả 403
+GET http://localhost:8080/api/v1/admin/orders
+Authorization: Bearer {{customer_token}}

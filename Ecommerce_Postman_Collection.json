@@ -1,0 +1,203 @@
+{
+  "info": {
+    "name": "Lumi Beauty Ecommerce API",
+    "description": "Storefront, customer authentication, cart, checkout, and Admin management requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8088/api/v1" },
+    { "key": "token", "value": "" },
+    { "key": "productId", "value": "1" },
+    { "key": "cartItemId", "value": "1" },
+    { "key": "orderId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Public catalogue",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products?page=0&size=12"
+          }
+        },
+        {
+          "name": "List categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/categories"
+          }
+        },
+        {
+          "name": "Product details",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products/{{productId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"buyer1\",\"email\":\"buyer@example.com\",\"password\":\"secret1\"}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login as demo Admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"admin\",\"password\":\"admin123\"}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  pm.collectionVariables.set('token', pm.response.json().token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login as demo customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"customer\",\"password\":\"customer123\"}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  pm.collectionVariables.set('token', pm.response.json().token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "View cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/cart"
+          }
+        },
+        {
+          "name": "Add product to cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"productId\":{{productId}},\"quantity\":1}"
+            },
+            "url": "{{baseUrl}}/cart"
+          }
+        },
+        {
+          "name": "Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"receiverName\":\"Buyer\",\"phoneNumber\":\"0900000000\",\"shippingAddress\":\"Example street\"}"
+            },
+            "url": "{{baseUrl}}/orders"
+          }
+        },
+        {
+          "name": "My orders",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/orders"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Create product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Sample product\",\"description\":\"Description\",\"imageUrl\":\"https://example.com/image.jpg\",\"price\":100,\"quantity\":10,\"categoryId\":1}"
+            },
+            "url": "{{baseUrl}}/admin/products"
+          }
+        },
+        {
+          "name": "All orders",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/admin/orders"
+          }
+        },
+        {
+          "name": "Update order status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"CONFIRMED\"}"
+            },
+            "url": "{{baseUrl}}/admin/orders/{{orderId}}/status"
+          }
+        }
+      ]
+    }
+  ]
+}
