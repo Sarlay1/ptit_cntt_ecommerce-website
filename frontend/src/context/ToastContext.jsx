@@ -16,9 +16,9 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div style={styles.container}>
+      <div className="toast-container">
         {toasts.map((t) => (
-          <div key={t.id} style={{ ...styles.toast, ...(t.type === 'error' ? styles.error : styles.success) }}>
+          <div key={t.id} className={`toast ${t.type === 'error' ? 'toast-error' : 'toast-success'}`}>
             {t.message}
           </div>
         ))}
@@ -31,34 +31,4 @@ export function useToast() {
   const ctx = useContext(ToastContext)
   if (!ctx) throw new Error('useToast phải được dùng bên trong ToastProvider')
   return ctx
-}
-
-const styles = {
-  container: {
-    position: 'fixed',
-    top: 16,
-    right: 16,
-    zIndex: 9999,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-  },
-  toast: {
-    minWidth: 260,
-    maxWidth: 360,
-    padding: '12px 16px',
-    borderRadius: 8,
-    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-    fontSize: 14,
-    fontWeight: 500,
-    animation: 'fadein 0.2s ease-in'
-  },
-  success: {
-    backgroundColor: '#dcfce7', // xanh lá nhạt
-    color: '#166534'
-  },
-  error: {
-    backgroundColor: '#fee2e2',
-    color: '#991b1b'
-  }
 }

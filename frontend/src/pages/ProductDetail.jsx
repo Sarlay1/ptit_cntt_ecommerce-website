@@ -106,9 +106,9 @@ export default function ProductDetail() {
 const styles = {
   wrapper: { display: 'flex', gap: 32, padding: 32, flexWrap: 'wrap' },
   name: { fontSize: 24, fontWeight: 700, marginBottom: 8 },
-  category: { color: '#6b7280', fontSize: 13, marginBottom: 12 },
-  price: { fontSize: 26, color: '#53614c', fontWeight: 700, marginBottom: 16 },
-  desc: { color: '#676a61', lineHeight: 1.8, marginBottom: 20 },
+  category: { color: 'var(--color-muted)', fontSize: 13, marginBottom: 12 },
+  price: { fontSize: 26, color: 'var(--color-brown)', fontWeight: 700, marginBottom: 16 },
+  desc: { color: 'var(--color-muted)', lineHeight: 1.8, marginBottom: 20 },
   stock: { fontSize: 14, marginBottom: 16 },
   qtyRow: { display: 'flex', alignItems: 'center', gap: 12 }
 }

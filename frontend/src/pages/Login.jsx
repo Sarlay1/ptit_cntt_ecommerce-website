@@ -37,9 +37,10 @@ export default function Login({ adminOnly = false }) {
       </p>
       <form onSubmit={handleSubmit}>
         <label>
-          Tên đăng nhập
+          Tên đăng nhập hoặc email
           <input
             autoComplete="username"
+            type="text"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             required

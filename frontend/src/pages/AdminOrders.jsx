@@ -79,7 +79,7 @@ export default function AdminOrders() {
             ))}
           </tbody>
         </table>
-        {orders.length === 0 && <p style={{ marginTop: 16, color: '#6b7280' }}>Chưa có đơn hàng nào.</p>}
+        {orders.length === 0 && <p style={{ marginTop: 16, color: 'var(--color-muted)' }}>Chưa có đơn hàng nào.</p>}
       </div>
     </div>
   )

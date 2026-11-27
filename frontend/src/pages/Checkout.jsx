@@ -109,7 +109,7 @@ export default function Checkout() {
 
           <div style={styles.totalRow}>
             <span>Tổng cộng</span>
-            <span style={{ color: '#53614c', fontWeight: 700, fontSize: 20 }}>{formatVND(totalPrice)}</span>
+            <span style={{ color: 'var(--color-brown)', fontWeight: 700, fontSize: 20 }}>{formatVND(totalPrice)}</span>
           </div>
 
           <button className="btn-primary" style={{ width: '100%', marginTop: 20 }} disabled={submitting}>
@@ -124,5 +124,5 @@ export default function Checkout() {
 const styles = {
   title: { fontSize: 24, fontWeight: 700, margin: '20px 0' },
   layout: { display: 'flex', gap: 24, flexWrap: 'wrap' },
-  totalRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, paddingTop: 16, borderTop: '1px solid #e5e7eb' }
+  totalRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--color-border)' }
 }

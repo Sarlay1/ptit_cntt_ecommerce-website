@@ -10,11 +10,13 @@ account's role (`ADMIN` or `CUSTOMER`).
 | Method | Path | Access | Request | Response |
 |---|---|---|---|---|
 | POST | `/auth/register` | Public | `{ "username": "buyer1", "email": "buyer@example.com", "password": "secret1" }` | `201` with `{ "token", "type", "id", "username", "email", "role" }`; role is `CUSTOMER` |
-| POST | `/auth/login` | Public | `{ "username": "buyer1", "password": "secret1" }` | `200` with `{ "token", "type", "id", "username", "email", "role" }` |
+| POST | `/auth/login` | Public | `{ "username": "buyer1", "password": "secret1" }` (the `username` field accepts either username or email) | `200` with `{ "token", "type", "id", "username", "email", "role" }` |
 
 Registration requires a username (4–50 characters), valid email, and password
 of at least 6 characters. Admin accounts must be provisioned by an
 administrator and cannot be self-registered.
+Login identifiers are trimmed and matched case-insensitively against either
+the account username or email.
 
 ## Catalogue
 
@@ -23,6 +25,11 @@ administrator and cannot be self-registered.
 | GET | `/products?keyword=&categoryId=&page=0&size=12` | Public | Optional search/filter/pagination query | Spring `Page` with `content` of product DTOs and page metadata |
 | GET | `/products/{id}` | Public | — | Product DTO: `id`, `name`, `description`, `imageUrl`, `price`, `quantity`, `categoryId`, `categoryName` |
 | GET | `/categories` | Public | — | Array of category DTOs |
+| GET | `/banners` | Public | — | Active hero slides ordered by `displayOrder`, then `id` |
+
+Hero slide DTOs contain `id`, `title`, `subtitle`, `imageUrl`, `imageAlt`,
+`caption`, `ctaLabel`, `ctaLink`, `displayOrder`, and `active`. CTA links must
+be internal paths or HTTPS URLs.
 
 ## Customer cart and orders
 
@@ -57,6 +64,10 @@ All routes in this section require an `ADMIN` JWT.
 | GET | `/admin/orders` | — | Array of all order DTOs |
 | PUT | `/admin/orders/{id}/status` | `{ "status": "CONFIRMED" }` | Updated order DTO |
 | POST | `/admin/upload` | Multipart form field `file` | `{ "url": "/uploads/..." }` |
+| GET | `/admin/banners` | — | All hero slides, including inactive slides |
+| POST | `/admin/banners` | Hero slide DTO without `id` | `201` with the created slide |
+| PUT | `/admin/banners/{id}` | Hero slide DTO | Updated slide |
+| DELETE | `/admin/banners/{id}` | — | `204` |
 
 Uploaded images are served under `/uploads/`.
 

@@ -120,9 +120,9 @@ export default function OrderHistory() {
 const styles = {
   title: { fontSize: 24, fontWeight: 700, margin: '20px 0' },
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  date: { color: '#9ca3af', fontSize: 13, fontWeight: 400 },
+  date: { color: 'var(--color-muted)', fontSize: 13, fontWeight: 400 },
   badge: { padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 700 },
-  footer: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 16, paddingTop: 12, borderTop: '1px solid #e5e7eb' },
-  shipInfo: { fontSize: 13, color: '#6b7280', lineHeight: 1.6 },
-  total: { fontWeight: 700, fontSize: 16, color: '#53614c' }
+  footer: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 16, paddingTop: 12, borderTop: '1px solid var(--color-border)' },
+  shipInfo: { fontSize: 13, color: 'var(--color-muted)', lineHeight: 1.6 },
+  total: { fontWeight: 700, fontSize: 16, color: 'var(--color-brown)' }
 }

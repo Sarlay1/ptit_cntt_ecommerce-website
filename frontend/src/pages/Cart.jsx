@@ -88,7 +88,7 @@ export default function Cart() {
                         >+</button>
                       </div>
                     </td>
-                    <td style={{ fontWeight: 700, color: '#53614c' }}>{formatVND(item.subTotal)}</td>
+                    <td style={{ fontWeight: 700, color: 'var(--color-brown)' }}>{formatVND(item.subTotal)}</td>
                     <td>
                       <button className="btn-danger" onClick={() => setConfirmItem(item)}>Xóa</button>
                     </td>
@@ -106,7 +106,7 @@ export default function Cart() {
             </div>
             <div style={{ ...styles.summaryRow, fontWeight: 700, fontSize: 18, marginTop: 12 }}>
               <span>Tổng cộng</span>
-              <span style={{ color: '#53614c' }}>{formatVND(totalPrice)}</span>
+              <span style={{ color: 'var(--color-brown)' }}>{formatVND(totalPrice)}</span>
             </div>
             <button className="btn-primary" style={{ width: '100%', marginTop: 20 }} onClick={() => navigate('/checkout')}>
               Tiến hành đặt hàng
@@ -135,5 +135,5 @@ const styles = {
   qtyControl: { display: 'flex', alignItems: 'center', gap: 8 },
   qtyBtn: { width: 28, height: 28, padding: 0, lineHeight: '28px', textAlign: 'center' },
   summary: { flex: 1, minWidth: 280, padding: 24, height: 'fit-content' },
-  summaryRow: { display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#374151' }
+  summaryRow: { display: 'flex', justifyContent: 'space-between', fontSize: 14, color: 'var(--color-muted)' }
 }

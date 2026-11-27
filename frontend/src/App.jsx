@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
+import Lenis from 'lenis'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminOrders from './pages/AdminOrders'
+import AdminHeroSlides from './pages/AdminHeroSlides'
 import AdminProducts from './pages/AdminProducts'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -13,6 +16,14 @@ import Register from './pages/Register'
 
 export default function App() {
   const location = useLocation()
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+    if (reducedMotion) return undefined
+
+    const lenis = new Lenis({ autoRaf: true, duration: 1.15 })
+    return () => lenis.destroy()
+  }, [])
 
   return (
     <>
@@ -39,6 +50,10 @@ export default function App() {
           <Route
             path="/admin/products"
             element={<ProtectedRoute adminOnly><AdminProducts /></ProtectedRoute>}
+          />
+          <Route
+            path="/admin/banners"
+            element={<ProtectedRoute adminOnly><AdminHeroSlides /></ProtectedRoute>}
           />
           <Route
             path="/admin/orders"

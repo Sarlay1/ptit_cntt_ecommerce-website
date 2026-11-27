@@ -1,9 +1,11 @@
 // @vitest-environment jsdom
 
-import { render, screen } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import Login from './Login'
+
+afterEach(cleanup)
 
 vi.mock('../context/AuthContext', () => ({
   useAuth: () => ({ login: vi.fn() })
@@ -24,5 +26,15 @@ describe('Login', () => {
       </MemoryRouter>
     )
     expect(screen.getByRole('heading', { name: 'Đăng nhập quản trị' })).toBeTruthy()
+  })
+
+  it('lets customers identify themselves by username or email', () => {
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
+    )
+
+    expect(screen.getByRole('textbox', { name: 'Tên đăng nhập hoặc email' })).toBeTruthy()
   })
 })

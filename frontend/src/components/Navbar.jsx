@@ -13,7 +13,6 @@ export default function Navbar() {
     navigate(loginPath)
   }
 
-  // Hàm sinh className cho NavLink: hover đổi nền, đang ở trang đó (active) thì giữ nguyên nền đó
   const navClass = ({ isActive }) => 'nav-link' + (isActive ? ' nav-link-active' : '')
 
   return (
@@ -31,6 +30,7 @@ export default function Navbar() {
             {isAdmin ? (
                 <>
                   <NavLink to="/admin/products" className={navClass}>Quản lý sản phẩm</NavLink>
+                  <NavLink to="/admin/banners" className={navClass}>Quản lý banner</NavLink>
                   <NavLink to="/admin/orders" className={navClass}>Quản lý đơn hàng</NavLink>
                 </>
             ) : isAuthenticated ? (
@@ -65,10 +65,10 @@ export default function Navbar() {
 }
 
 const styles = {
-  nav: { backgroundColor: '#fbfaf7', position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid #e8e4da' },
-  badge: { position: 'absolute', top: -6, right: -2, backgroundColor: '#566453', color: '#fff', fontSize: 11, fontWeight: 700, borderRadius: 10, padding: '1px 6px' },
+  nav: { backgroundColor: 'var(--color-ivory)', position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid var(--color-border)' },
+  badge: { position: 'absolute', top: -6, right: -2, backgroundColor: 'var(--color-brown)', color: 'var(--color-ivory)', fontSize: 11, fontWeight: 700, borderRadius: 10, padding: '1px 6px' },
   userBox: { display: 'flex', alignItems: 'center', gap: 12, marginLeft: 8 },
-  userName: { color: '#5e6256', fontSize: 13 },
-  logoutBtn: { background: 'transparent', border: '1px solid #dcd8ce', color: '#4d5148', padding: '7px 12px', borderRadius: 4, cursor: 'pointer', fontSize: 13 },
-  registerBtn: { backgroundColor: '#566453', color: '#fff', padding: '9px 16px', borderRadius: 4, textDecoration: 'none', fontSize: 13, fontWeight: 600, marginLeft: 4 }
+  userName: { color: 'var(--color-brown)', fontSize: 13 },
+  logoutBtn: { background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-brown)', padding: '7px 12px', borderRadius: 4, cursor: 'pointer', fontSize: 13 },
+  registerBtn: { backgroundColor: 'var(--color-brown)', color: 'var(--color-ivory)', padding: '9px 16px', borderRadius: 4, textDecoration: 'none', fontSize: 13, fontWeight: 600, marginLeft: 4 }
 }

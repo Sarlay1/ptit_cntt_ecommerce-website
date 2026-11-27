@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ecom.webbanhang.config.DataSeederTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-27T05:28:02.394Z" hostname="DESKTOP-8KHVSP4" time="2.083">
+<testsuite name="com.ecom.webbanhang.config.DataSeederTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-27T15:17:49.707Z" hostname="DESKTOP-8KHVSP4" time="1.884">
   <properties/>
-  <testcase name="seedsCosmeticsCategoriesAndProductsIntoAnEmptyCatalog()" classname="com.ecom.webbanhang.config.DataSeederTest" time="2.072"/>
-  <testcase name="preservesLegacyCatalogWhenOrdersAlreadyExist()" classname="com.ecom.webbanhang.config.DataSeederTest" time="0.009"/>
+  <testcase name="addsCosmeticsWithoutDeletingExistingCatalogData()" classname="com.ecom.webbanhang.config.DataSeederTest" time="1.859"/>
+  <testcase name="seedsCosmeticsCategoriesAndProductsIntoAnEmptyCatalog()" classname="com.ecom.webbanhang.config.DataSeederTest" time="0.022"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\ADMIN\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.18\417558ea01fe9f0e8a94af28b9469d281c4e3984\byte-buddy-agent-1.14.18.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

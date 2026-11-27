@@ -14,6 +14,10 @@ export const categoryApi = {
   getAll: () => apiClient.get('/categories')
 }
 
+export const heroBannerApi = {
+  getActiveSlides: () => apiClient.get('/banners')
+}
+
 export const cartApi = {
   getCart: () => apiClient.get('/cart'),
   addToCart: (productId, quantity) => apiClient.post('/cart', { productId, quantity }),
@@ -35,5 +39,9 @@ export const adminApi = {
   deleteProduct: (id) => apiClient.delete(`/admin/products/${id}`),
   createCategory: (data) => apiClient.post('/admin/categories', data),
   deleteCategory: (id) => apiClient.delete(`/admin/categories/${id}`),
+  getBannerSlides: () => apiClient.get('/admin/banners'),
+  createBannerSlide: (data) => apiClient.post('/admin/banners', data),
+  updateBannerSlide: (id, data) => apiClient.put(`/admin/banners/${id}`, data),
+  deleteBannerSlide: (id) => apiClient.delete(`/admin/banners/${id}`),
   uploadImage: (formData) => apiClient.post('/admin/upload', formData)
 }
